@@ -1,0 +1,273 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=blue,
+    citecolor=blue
+}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Metric Learning: Triplet-Loss\\
+}
+
+\author{\IEEEauthorblockN{Paolo Junior Angeloni}
+\IEEEauthorblockA{\textit{Dept. Computer Science \& Software Engineering} \\
+\textit{Concordia University}\\
+Montreal, Canada \\
+p\_ange@live.concordia.ca}
+{\footnotesize ID: 25976944}
+\and
+\IEEEauthorblockN{Joshua Onyema}
+\IEEEauthorblockA{\textit{Dept. Computer Science \& Software Engineering} \\
+\textit{Concordia University}\\
+Montreal, Canada \\
+joshua.onyema@mail.concordia.ca}
+{\footnotesize ID: 40293065}
+}
+
+\maketitle
+
+\begin{abstract}
+This report evaluates the performance of three adaptive bitrate (ABR) algorithms—Dynamic, BOLA, and Throughput—within the Dynamic Adaptive Streaming over HTTP (DASH) protocol. Using a custom video player \cite{b1} and a controlled sequence of aggressive network throttling profiles, we measured key performance metrics including buffer levels, throughput, and latency. Our findings indicate that, under the tested scenarios, all ABR algorithms provided by \texttt{dash.js} \cite{b2} yield similar playback performance, with only minor differences observed. This suggests that under conditions of extreme network volatility, performance is dictated more by the network constraints than by choice of ABR algorithm.
+\end{abstract}
+
+\section{Introduction}
+DASH is a pull-based streaming standard that has become popular, particularly for Video on Demand (VoD) applications. In DASH, multimedia files are divided into small, individually playable segments—often called streamlets—typically lasting a few seconds each. The server provides a Media Presentation Description (MPD) file, which is an XML-formatted playlist that describes the available segments and their properties. To begin playback, the client downloads the MPD file, then sequentially requests and retrieves the streamlets listed in the playlist. This pull-based approach allows the client to adaptively select the most appropriate segment quality based on current network conditions, enabling smooth playback and efficient bandwidth usage.
+\par\vspace{1em}
+The architecture of a DASH-based streaming application is fundamentally client-driven: the client is responsible for fetching, buffering, and playing segments, as well as adapting to bandwidth fluctuations. This project explores the practical aspects of DASH by implementing a custom video player and analyzing its behavior under various simulated network scenarios, with a focus on adaptive bitrate (ABR) strategies and their impact on playback quality.
+
+\subsection{Motivation}
+This work aims for a deeper understanding of how the  DASH protocol responds to fluctuating bandwidth and latency in real-world environments. By designing and implementing our own DASH-based player \cite{b1}, we were able to make specific design choices, such as:
+\begin{itemize}
+    \item Integrating the \texttt{dash.js} \cite{b2} library for MPEG-DASH playback and customizing its Adaptive Bitrate (ABR) algorithms.
+    \item Implementing exportable performance charts using Chart.js \cite{b3} to visualize buffer levels, throughput, and latency during video playback.
+    \item Applying controlled network throttling to evaluate the video player's adaptation \cite{b4}.
+\end{itemize}
+
+\subsection{Adaptive Bitrate (ABR) Modes in DASH \cite{b5}}
+Various algorithms allow the player to select the most appropriate video quality based on current network conditions. We focus on three ABR strategies provided by DASH:
+\begin{itemize}
+    \item \textbf{Throughput:} Selects video quality based on recently downloaded throughput average, aiming to derive the optimal bitrate for the next downloadable segments \cite{b6}.
+    \item \textbf{BOLA:} Chooses the quality level based on the current buffer level, seeking to match it with the the bitrate of the next downloadable segment \cite{b7}.
+    \item \textbf{Dynamic mode:} When both Throughput and BOLA rules are enabled; DASH operates in dynamic mode \cite{b5}, switching between the two algorithms depending on current buffer levels.
+\end{itemize}
+
+\subsection{Network Throttling Strategy}
+We applied a custom sequence of network throttling profiles using the browser's DevTools Network tab to simulate varying bandwidth conditions. The sequence was as follows:
+\begin{itemize}
+    \item 500 kbps for 1 minute
+    \item 3 Mbps for 2 minutes
+    \item 100 kbps for 1 minute
+    \item 1 Mbps for 2 minutes
+    \item No throttling for 4 minutes
+\end{itemize}
+
+\subsection{How to Test the DASH Player Implementation}
+\textbf{Requirements:}
+\begin{itemize}
+    \item Python 3 (for the simple HTTP server)
+    \item A modern web browser (tested with Chromium-based browsers)
+    \item Internet access to fetch the DASH manifest and segments / streamlets
+\end{itemize}
+\par\vspace{1em}
+To test the DASH player implementation provided in our code repository \cite{b1}, follow these steps:
+
+\begin{enumerate}
+    \item \textbf{Clone the repository:}\\
+    {\footnotesize{\texttt{git clone https://codeberg.org/init5iv3/concordiaCS.git}}}
+    \item \textbf{Navigate to the project directory:}\\
+    {\footnotesize{\texttt{cd concordiaCS/6461/lab02/server}}}
+    \item \textbf{Start a local HTTP server (Python 3 example):}\\
+    {\footnotesize{\texttt{python3 -m http.server 8080}}}
+    \item \textbf{Open your browser and visit:}\\
+    {\footnotesize{\texttt{http://localhost:8080/dash.html}}}
+    \item \textbf{Test the player:}
+    \begin{itemize}
+        \item Use the browser's DevTools Network tab to apply throttling profiles and observe the player's adaptation.
+        \item Export buffer, throughput, and latency charts using the provided buttons.
+        \item Modify the ABR settings in \texttt{dash.html} (see the \texttt{player.updateSettings} section) to test BOLA or Throughput rules individually.
+        \item Logging statements related to elapsed time, applied ABR rules, buffer level, throughput and latency are displayed in the browser DevTool's \texttt{console} tab in 8 second intervals.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Additional Notes}
+
+The MPEG-DASH XML-formatted playlist used here is available at \href{http://dash.akamaized.net/dash264/TestCases/1a/sony/SNE_DASH_SD_CASE1A_REVISED.mpd}{this link}.
+\par\vspace{1em}
+For all experiments, the \texttt{dash.js} \cite{b2} setting \texttt{fastSwitchEnabled} was set to \texttt{true} to ensure rapid quality switching was available in every ABR mode. This allowed for a fair comparison of the adaptation strategies, as all modes could more quickly replace buffered segments with higher-quality ones when network conditions improved.
+
+\section{Results}
+The following graphs illustrate key metrics such as buffer level, throughput, and latency under Dynamic, BOLA and Throughput ABR modes using the custom DASH player:
+\subsection{Throughput Mode}
+
+\begin{table}[H]
+\centering
+\caption{Average Metrics for Throughput Mode}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Average Value} \\
+\hline
+Buffer Level (s) & 15.19 \\
+Throughput (Mbps) & 0.40 \\
+Latency (ms) & 91.70 \\
+\hline
+\end{tabular}
+\label{tab:throughput-averages}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{throughput_bufferChart.png}
+    \caption{Buffer level over time (Throughput mode).}
+    \label{fig:throughput-buffer}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{throughput_throughputChart.png}
+    \caption{Measured throughput over time (Throughput mode).}
+    \label{fig:throughput-throughput}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{throughput_latencyChart.png}
+    \caption{Segment download latency (Throughput mode).}
+    \label{fig:throughput-latency}
+\end{figure}
+
+\subsection{BOLA Mode}
+
+\begin{table}[H]
+\centering
+\caption{Average Metrics for BOLA Mode}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Average Value} \\
+\hline
+Buffer Level (s) & 14.85 \\
+Throughput (Mbps) & 0.39 \\
+Latency (ms) & 111.74 \\
+\hline
+\end{tabular}
+\label{tab:bola-averages}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{bola_bufferChart.png}
+    \caption{Buffer level over time (BOLA mode).}
+    \label{fig:bola-buffer}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{bola_throughputChart.png}
+    \caption{Measured throughput over time (BOLA mode).}
+    \label{fig:bola-throughput}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{bola_latencyChart.png}
+    \caption{Segment download latency (BOLA mode).}
+    \label{fig:bola-latency}
+\end{figure}
+
+\subsection{Dynamic Mode}
+
+\begin{table}[H]
+\centering
+\caption{Average Metrics for Dynamic Mode}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Average Value} \\
+\hline
+Buffer Level (s) & 14.57 \\
+Throughput (Mbps) & 0.43 \\
+Latency (ms) & 95.00 \\
+\hline
+\end{tabular}
+\label{tab:dynamic-averages}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{dynamic_bufferChart.png}
+    \caption{Buffer level over time (Dynamic mode).}
+    \label{fig:dynamic-buffer}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{dynamic_throughputChart.png}
+    \caption{Measured throughput over time (Dynamic mode).}
+    \label{fig:dynamic-throughput}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{dynamic_latencyChart.png}
+    \caption{Segment download latency (Dynamic mode).}
+    \label{fig:dynamic-latency}
+\end{figure}
+
+\subsection{Comparison}
+
+We compare the three ABR modes (Dynamic, BOLA, and Throughput) for each key metric:
+
+\textbf{Buffer Level:}  
+Figures~\ref{fig:throughput-buffer}, \ref{fig:bola-buffer}, and \ref{fig:dynamic-buffer} show the buffer level over time for each mode. In maintaining a target buffer, BOLA mode exhibited the most consistent/stable buffer levels. In contrast, Throughput mode, which react to bandwidth predictions, showed more fluctuation. Dynamic mode, as a hybrid, maintained a balance between Throughput and BOLA as network conditions change - it also achieved the highest average throughput (Figure~\ref{tab:dynamic-averages}), likely biasing its strategy based on the current playback state. All three modes experienced a video-playback stall during the 1-minute network throttle of 100 kbps.
+\par\vspace{1em}
+\textbf{Throughput:}  
+Figures~\ref{fig:throughput-throughput}, \ref{fig:bola-throughput}, and \ref{fig:dynamic-throughput} present the measured throughput for each mode. The throughput trends are similar across all modes, there are subtle difference worth noting. Throughput mode reacts more quickly to bandwidth changes, while BOLA demonstrated a more delayed response, prioritizing buffer stability over immediate quality increases. Dynamic mode's superior average throughput (Figure~\ref{tab:throughput-averages}) suggests its hybrid nature was effective, likely leveraging the aggressive responsiveness of the Throughput algorithm during periods of increased bandwidth.
+\par\vspace{1em}
+\textbf{Latency:}  
+Figures~\ref{fig:throughput-latency}, \ref{fig:bola-latency}, and \ref{fig:dynamic-latency} illustrate segment download latency. Latency remains low for all modes, with slight increases during bandwidth drops. BOLA showed the highest average latency (Figure~\ref{tab:bola-averages}), since it is less responsive to network changes, it takes more time to adapt, whereas Throughput, having the lowest average latency (Figure~\ref{tab:throughput-averages}), is more reactive. Dynamic mode displayed its hyrbrid approach, as we observed latency (Figure~\ref{tab:dynamic-averages}) to be in between BOLA and Throughput. Latency began very high for early stages of video playback since the first network throttle (500 kbps) was applied, thus slowing the process of building sufficient initial buffer.
+
+\subsection{Discussion}
+The central finding of these experiments is the similarity in performance across the Dynamic, BOLA, and Throughput algorithms. While these strategies are designed with different logic - reacting to bandwidth predictions versus buffer stability - their distinctions were largely neutralized by the aggressive and rapidly changing nature of the applied network throttling. 
+\par\vspace{1em}
+The reason for this similarity is that the network conditions did not present a scenario for clear algorithmic optimization. Given short periods of severe throttling, the available bandwidth was so low that the overriding priority for each mode became stall prevention.
+\par\vspace{1em}
+These results should not be interpreted to mean that the choice of ABR algorithm is unimportant. Instead, they highlight the practical impact of the network environment. In this case, the external constraints, rather than the algorithms' internal logic, become the dominant factor in determining playback performance.
+
+\section{Conclusions}
+This study demonstrated that under network conditions with severe and rapid bandwidth fluctuations, the performance differences between the \texttt{dash.js} \cite{b2} Throughput, BOLA and Dynamic ABR algorithms becomes minimal. This convergence occurs as the network constraints force the algorithms into conservative behaviour to avoid video-playback stalls.
+\par\vspace{1em}
+Further improvements and future work could focus on testing under conditions that allow the algorithm's differences to emerge:
+\begin{itemize}
+    \item Testing with additional ABR algorithms or custom rules.
+    \item Evaluating performance with different segment durations and buffer sizes with more prolonged periods of congestion.
+    \item Extending the analysis to mobile or wireless network scenarios.
+\end{itemize}
+
+\section*{Acknowledgment}
+We would like to thank Professor Aiman Hanna and the teaching assistants for their guidance and support throughout this project.
+
+\begin{thebibliography}{00}
+\bibitem{b1} P.J. Angeloni and J. Onyema, ``DASH protocol analysis code repository,'' [Online]. Available: \url{https://codeberg.org/init5iv3/concordiaCS/src/branch/main/6461/lab02}. [Accessed: Oct. 21, 2025].
+\bibitem{b2} DASH Industry Forum, ``dash.js API Documentation,'' [Online]. Available: \url{https://cdn.dashjs.org/latest/jsdoc/index.html}. [Accessed: Oct. 21, 2025].
+\bibitem{b3} Chart.js, ``Chart.js Documentation,'' [Online]. Available: \url{https://www.chartjs.org/docs/latest/}. [Accessed: Oct. 21, 2025].
+\bibitem{b4} Chrome DevTools, ``Chrome DevTools Throttling,'' [Online]. Available: \url{https://developer.chrome.com/docs/devtools/settings/throttling#network-throttling}. [Accessed: Oct: 21, 2025]
+\bibitem{b5} DASH Industry Forum, ``dash.js Adaptive Birate Streaming,'' [Online]. Available: \url{https://dashif.org/dash.js/pages/usage/abr/}. [Accessed: Oct: 22, 2025]
+\bibitem{b6} DASH Industry Forum, ``dash.js ThroughputRule,'' [Online]. Available: \url{https://dashif.org/dash.js/pages/usage/abr/throughput-rule.html}. [Accessed: Oct. 22, 2025].
+\bibitem{b7} DASH Industry Forum, ``dash.js BolaRule,'' [Online]. Available: \url{https://dashif.org/dash.js/pages/usage/abr/bola-rule.html}. [Accessed: Oct. 22, 2025].
+\end{thebibliography}
+\vspace{12pt}
+
+\end{document}
