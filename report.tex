@@ -42,7 +42,13 @@ p\_ange@live.concordia.ca}
 \maketitle
 
 \section{The Triplet-Loss Pipeline}
-...
+In this supervised similarity or metric learning, the Triplet-Loss pipeline consists of 
+\begin{itemize}
+    \item Retrieve images from CUB200\_2011 dataset within \texttt{TripletCUBDataset} class
+    \item Transform images into tensors and apply additional augmentations to the training set only
+    \item 
+    \item 
+\end{itemize}
 \par\vspace{1em}
 ...
 
@@ -74,14 +80,16 @@ p\_ange@live.concordia.ca}
 
 \begin{table}[H]
 \centering
-\caption{Average Metrics for Throughput Mode}
+\caption{Training results with ResNet18}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Average Value} \\
+\textbf{Metric} & \textbf{Value} \\
 \hline
-Buffer Level (s) & 15.19 \\
-Throughput (Mbps) & 0.40 \\
-Latency (ms) & 91.70 \\
+Epoch & ... \\
+Loss & ... \\
+Cosine Similarity Anchor-Positive & ... \\
+Cosine Similarity Anchor-Negative & ... \\
+Train Top-1 & ... \\
 \hline
 \end{tabular}
 \label{tab:}
