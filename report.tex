@@ -509,5 +509,25 @@ Precision@10 & 42.84 \\
 \end{table}
 
 \section{Discussion}
+In running our experiments (multiple ResNet models and different hyperparameters), we understood the following:
+\begin{enumerate}
+    \item The best result was obtained by increasing epoch size from 20 to 60. We began with 20 epochs to better evaluate the final training hyperparameters, consistent with out understanding that a higher epoch size results in a more accurate prediction model. This can be observed for both Experiments 5 and 6, where the loss was lower and accuracy was higher than in previous experiments.
+    \item with an epoch size of 60 in experiments 5 and 6, the model with a higher batch size (6) yielded a lower training loss (0.3, \ref{tab:six_stats_special}), higher accuracy (89\%, \ref{tab:six_stats_special}) and precision metrics.
+    \item The clustering of the classes (UMAP and T-SNE, \ref{fig:five_vis_special}, \ref{fig:six_vis_special}) did not yield clear differences between the models. However, stronger evidence of clustering is observed in Experiments 5 and 6, which refers to the higher accuracy and precision (\ref{tab:six_precision_special}) of those models.
+\end{enumerate}
+
+\par\vspace{1em}
+\section*{Acknowledgment}
+We would like to thank Professor Arash Azarfar and Firat Oncel for their guidance and support throughout this project. Large Language Models, like Google's Gemini were used in an educational context to further understand the resources for this research.
+
+\begin{thebibliography}{00}
+\bibitem{b1} PyTorch, ``PyTorch API Documentation,'' [Online]. Available: \url{https://docs.pytorch.org/docs/stable/index.html}. [Accessed: Oct. 21, 2025].
+\bibitem{b2} Numpy, ``Numpy API Documentation,'' [Online]. Available: \url{https://numpy.org/doc/stable/}. [Accessed: Oct. 21, 2025].
+\bibitem{b3} matplotlib, ``Matplotlib API Documentation,'' [Online]. Available: \url{https://matplotlib.org/stable/index.html}. [Accessed: Oct. 21, 2025].
+\bibitem{b4} pandas, ``pandas API Documentation,'' [Online]. Available: \url{https://pandas.pydata.org/docs/}. [Accessed: Oct. 21, 2025].
+\bibitem{b5} UMAP, ``UMAP API Documentation,'' [Online]. Available: \url{https://umap-learn.readthedocs.io/en/latest/}. [Accessed: Oct. 23, 2025].
+\bibitem{b5} TSNE, ``TSNE API Documentation,'' [Online]. Available: \url{https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html}. [Accessed: Oct. 23, 2025].
+\end{thebibliography}
+\vspace{12pt}
 
 \end{document}
