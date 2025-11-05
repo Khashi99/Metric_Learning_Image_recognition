@@ -37,10 +37,10 @@ Precision@10 & 32.55 \\
 \hline
 \textbf{Metric} & \textbf{Value} \\
 \hline
-Loss & XXXXXXXXXXXXXXXXXXX \\
-Top-1 Accuracy (\%) & XXXXXXXXXXXXXXXXXXX \\
-Cosine Similarity Anchor-Positive & XXXXXXXXXXXXXXXXXXX \\
-Cosine Similarity Anchor-Negative &  XXXXXXXXXXXXXXXXXXX \\
+Loss & 0.5932 \\
+Top-1 Accuracy (\%) & 75.04 \\
+Cosine Similarity Anchor-Positive & 0.6542 \\
+Cosine Similarity Anchor-Negative &  0.1330 \\
 \hline
 \end{tabular}
 \label{tab:third_stats_resnet18}
@@ -52,9 +52,9 @@ Cosine Similarity Anchor-Negative &  XXXXXXXXXXXXXXXXXXX \\
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
 \hline
-Precision@1 & XXXXXXXXXXXXXXXXXXX \\
-Precision@5 & XXXXXXXXXXXXXXXXXXX \\
-Precision@10 & XXXXXXXXXXXXXXXXXXX \\
+Precision@1 & 25.93 \\
+Precision@5 & 31.28 \\
+Precision@10 & 31.60 \\
 \hline
 \end{tabular}
 \label{tab:third_precision_resnet18}
