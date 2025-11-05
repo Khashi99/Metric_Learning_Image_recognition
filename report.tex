@@ -93,6 +93,12 @@ ResNet34 contains approximately 21.5 million parameters \\
     \caption{Experiment 3 with ResNet34}
     \label{fig:third_resnet34}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_34_4.png}
+    \caption{Experiment 4 with ResNet34}
+    \label{fig:fourth_resnet34}
+\end{figure}
 
 
 \section{Embedding Visualizations}
@@ -117,10 +123,23 @@ ResNet34 contains approximately 21.5 million parameters \\
     \caption{Experiment 2 with ResNet34}
     \label{fig:second_vis_resnet34}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_3.png}
+    \caption{Experiment 3 with ResNet34}
+    \label{fig:third_vis_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_4.png}
+    \caption{Experiment 4 with ResNet34}
+    \label{fig:fourth_vis_resnet34}
+\end{figure}
 
 
 \section{Evaluation Results}
 \subsection{ResNet18}
+
 \begin{table}[H]
 \centering
 \caption{Loss and Accuracy Metrics for Experiment 1}
@@ -136,7 +155,6 @@ Cosine Similarity Anchor-Negative &  \\
 \end{tabular}
 \label{tab:first_stats_resnet18}
 \end{table}
-
 \begin{table}[H]
 \centering
 \caption{Precision Metrics for Experiment 1}
@@ -242,6 +260,36 @@ Precision@10 & 29.55 \\
 \hline
 \end{tabular}
 \label{tab:third_precision_resnet34}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Loss & 0.6131 \\
+Top-1 Accuracy (\%) & 73.66 \\
+Cosine Similarity Anchor-Positive & 0.6504 \\
+Cosine Similarity Anchor-Negative & 0.1431 \\
+\hline
+\end{tabular}
+\label{tab:fourth_stats_resnet34}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 25.51 \\
+Precision@5 & 28.31 \\
+Precision@10 & 27.08 \\
+\hline
+\end{tabular}
+\label{tab:fourth_precision_resnet34}
 \end{table}
 
 \end{document}
