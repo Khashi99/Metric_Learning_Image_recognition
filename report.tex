@@ -41,7 +41,6 @@ p\_ange@live.concordia.ca}
 
 \maketitle
 
-
 \section{The Triplet-Loss Pipeline}
 In this supervised similarity or metric learning, the Triplet-Loss pipeline consists of 
 \begin{enumerate}
@@ -52,26 +51,45 @@ In this supervised similarity or metric learning, the Triplet-Loss pipeline cons
 \end{enumerate}
 \par\vspace{1em}
 
-
 \section{Training Hyper-parameters}
 We conducted 4 experiments using two pre-trained models: ResNet18 and ResNet34 \\
-ResNet18 contains ... million parameters \\
+ResNet18 contains approximately 11.4 million parameters \\
 ResNet34 contains approximately 21.5 million parameters \\
 \begin{enumerate}
     \item epochs: 20, learning rate: 0.001, batch size: 32
     \item epochs: 20, learning rate: 0.002, batch size: 32
     \item epochs: 20, learning rate: 0.001, batch size: 64
     \item epochs: 20, learning rate: 0.002, batch size: 64
+    \item[] {\small\textit{Extended Training with ResNet18}}
+    \item epochs: 60, learning rate: 0.001, batch size: 32
+    \item epochs: 60, learning rate: 0.001, batch size: 64
 \end{enumerate}
-
 
 \section{Training Curves}
 \subsection{ResNet18}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.48\textwidth]{loss_graph_34_1.png}
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_1.png}
     \caption{Experiment 1 with ResNet18}
     \label{fig:first_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_1.png}
+    \caption{Experiment 2 with ResNet18}
+    \label{fig:second_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_3.png}
+    \caption{Experiment 3 with ResNet18}
+    \label{fig:third_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_4.png}
+    \caption{Experiment 4 with ResNet18}
+    \label{fig:fourth_resnet18}
 \end{figure}
 
 \subsection{ResNet34}
@@ -109,6 +127,24 @@ ResNet34 contains approximately 21.5 million parameters \\
     \caption{Experiment 1 with ResNet18}
     \label{fig:first_vis_resnet18}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_2.png}
+    \caption{Experiment 2 with ResNet18}
+    \label{fig:second_vis_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_3.png}
+    \caption{Experiment 3 with ResNet18}
+    \label{fig:third_vis_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_4.png}
+    \caption{Experiment 4 with ResNet18}
+    \label{fig:fourth_vis_resnet18}
+\end{figure}
 
 \subsection{ResNet34}
 \begin{figure}[H]
@@ -145,12 +181,12 @@ ResNet34 contains approximately 21.5 million parameters \\
 \caption{Loss and Accuracy Metrics for Experiment 1}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric (Average)} & \textbf{Value} \\
 \hline
-Loss &  \\
-Top-1 Accuracy (\%) &  \\
-Cosine Similarity Anchor-Positive &  \\
-Cosine Similarity Anchor-Negative &  \\
+Loss & 0.5020 \\
+Top-1 Accuracy (\%) & 79.60 \\
+Cosine Similarity Anchor-Positive & 0.6735 \\
+Cosine Similarity Anchor-Negative &  0.0359 \\
 \hline
 \end{tabular}
 \label{tab:first_stats_resnet18}
@@ -162,12 +198,72 @@ Cosine Similarity Anchor-Negative &  \\
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
 \hline
-Precision@1 &  \\
-Precision@5 &  \\
-Precision@10 &  \\
+Precision@1 & 33.74 \\
+Precision@5 & 33.83 \\
+Precision@10 & 32.55 \\
 \hline
 \end{tabular}
 \label{tab:first_precision_resnet18}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.3277 \\
+Top-1 Accuracy (\%) & 89.11 \\
+Cosine Similarity Anchor-Positive & 0.7762 \\
+Cosine Similarity Anchor-Negative &  -0.0004 \\
+\hline
+\end{tabular}
+\label{tab:third_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 39.92 \\
+Precision@5 & 44.03 \\
+Precision@10 & 42.51 \\
+\hline
+\end{tabular}
+\label{tab:third_precision_resnet18}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.5633 \\
+Top-1 Accuracy (\%) & 76.53 \\
+Cosine Similarity Anchor-Positive & 0.6284 \\
+Cosine Similarity Anchor-Negative &  0.0632 \\
+\hline
+\end{tabular}
+\label{tab:forth_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 31.69 \\
+Precision@5 & 28.48 \\
+Precision@10 & 27.04 \\
+\hline
+\end{tabular}
+\label{tab:forth_precision_resnet18}
 \end{table}
 
 \subsection{ResNet34}
@@ -177,7 +273,7 @@ Precision@10 &  \\
 \caption{Loss and Accuracy Metrics for Experiment 1}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric (Average)} & \textbf{Value} \\
 \hline
 Loss & 0.5902 \\
 Top-1 Accuracy (\%) & 75.85 \\
@@ -207,7 +303,7 @@ Precision@10 & 30.37 \\
 \caption{Loss and Accuracy Metrics for Experiment 2}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric (Average)} & \textbf{Value} \\
 \hline
 Loss & 0.5829 \\
 Top-1 Accuracy (\%) & 75.63 \\
@@ -237,7 +333,7 @@ Precision@10 & 29.42 \\
 \caption{Loss and Accuracy Metrics for Experiment 3}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric (Average)} & \textbf{Value} \\
 \hline
 Loss & 0.4440 \\
 Top-1 Accuracy (\%) & 83.28 \\
@@ -267,7 +363,7 @@ Precision@10 & 29.55 \\
 \caption{Loss and Accuracy Metrics for Experiment 4}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric (Average)} & \textbf{Value} \\
 \hline
 Loss & 0.6131 \\
 Top-1 Accuracy (\%) & 73.66 \\
@@ -291,5 +387,95 @@ Precision@10 & 27.08 \\
 \end{tabular}
 \label{tab:fourth_precision_resnet34}
 \end{table}
+
+\section{\textit{Extended Training with ResNet18}}
+\subsection{epochs: 60, learning rate: 0.001, batch size: 32}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_32_special.png}
+    \caption{Experiment 5 with ResNet18}
+    \label{fig:five_special}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_32_special.png}
+    \caption{Experiment 5 with ResNet18}
+    \label{fig:five_vis_special}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 5}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.4344 \\
+Top-1 Accuracy (\%) & 83.53 \\
+Cosine Similarity Anchor-Positive & 0.7268 \\
+Cosine Similarity Anchor-Negative & 0.0781 \\
+\hline
+\end{tabular}
+\label{tab:five_stats_special}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 5}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 33.74 \\
+Precision@5 & 35.97 \\
+Precision@10 & 34.86 \\
+\hline
+\end{tabular}
+\label{tab:five_precision_special}
+\end{table}
+
+\subsection{epochs: 60, learning rate: 0.001, batch size: 64}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{loss_graph_64_special.png}
+    \caption{Experiment 6 with ResNet18}
+    \label{fig:six_special}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_64_special.png}
+    \caption{Experiment 6 with ResNet18}
+    \label{fig:six_vis_special}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss &  \\
+Top-1 Accuracy (\%) &  \\
+Cosine Similarity Anchor-Positive &  \\
+Cosine Similarity Anchor-Negative &  \\
+\hline
+\end{tabular}
+\label{tab:six_stats_special}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 &  \\
+Precision@5 &  \\
+Precision@10 &  \\
+\hline
+\end{tabular}
+\label{tab:six_precision_special}
+\end{table}
+
 
 \end{document}
