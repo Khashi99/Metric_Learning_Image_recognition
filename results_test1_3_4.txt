@@ -94,6 +94,8 @@ Precision@10 & 42.51 \\
 
 
 
+
+
 \begin{table}[H]
 \centering
 \caption{Loss and Accuracy Metrics for Experiment 4}
@@ -122,5 +124,36 @@ Precision@10 & 27.04 \\
 \hline
 \end{tabular}
 \label{tab:forth_precision_resnet18}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Loss & 0.3081 \\
+Top-1 Accuracy (\%) & 89.61 \\
+Cosine Similarity Anchor-Positive & 0.7707 \\
+Cosine Similarity Anchor-Negative &  0.0127 \\
+\hline
+\end{tabular}
+\label{tab:sixth_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 46.91 \\
+Precision@5 & 44.69 \\
+Precision@10 & 42.84 \\
+\hline
+\end{tabular}
+\label{tab:sixth_precision_resnet18}
 \end{table}
 
