@@ -32,29 +32,29 @@ Precision@10 & 32.55 \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 2}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
 \hline
-Loss & XXXXXXXXXXXXXXXXXXX \\
-Top-1 Accuracy (\%) & XXXXXXXXXXXXXXXXXXX \\
-Cosine Similarity Anchor-Positive & XXXXXXXXXXXXXXXXXXX \\
-Cosine Similarity Anchor-Negative &  XXXXXXXXXXXXXXXXXXX \\
+Loss & 0.5932 \\
+Top-1 Accuracy (\%) & 75.04 \\
+Cosine Similarity Anchor-Positive & 0.6542 \\
+Cosine Similarity Anchor-Negative &  0.1330 \\
 \hline
 \end{tabular}
 \label{tab:third_stats_resnet18}
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 2}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
 \hline
-Precision@1 & XXXXXXXXXXXXXXXXXXX \\
-Precision@5 & XXXXXXXXXXXXXXXXXXX \\
-Precision@10 & XXXXXXXXXXXXXXXXXXX \\
+Precision@1 & 25.93 \\
+Precision@5 & 31.28 \\
+Precision@10 & 31.60 \\
 \hline
 \end{tabular}
 \label{tab:third_precision_resnet18}
@@ -64,7 +64,7 @@ Precision@10 & XXXXXXXXXXXXXXXXXXX \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 3}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
@@ -79,7 +79,7 @@ Cosine Similarity Anchor-Negative &  -0.0004 \\
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 3}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
@@ -96,7 +96,7 @@ Precision@10 & 42.51 \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 4}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
@@ -111,7 +111,7 @@ Cosine Similarity Anchor-Negative &  0.0632 \\
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 4}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\

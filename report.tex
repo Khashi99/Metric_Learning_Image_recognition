@@ -1,0 +1,55 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=blue,
+    citecolor=blue
+}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Metric Learning: Triplet-Loss\\
+}
+
+\author{\IEEEauthorblockN{Khashayar Zardoui}
+\IEEEauthorblockA{\textit{Dept. Computer Science \& Software Engineering} \\
+\textit{Concordia University}\\
+Montreal, Canada \\
+khashayar.zardoui@mail.concordia.ca}
+{\footnotesize ID: 40052568}
+\and
+\IEEEauthorblockN{Paolo Junior Angeloni}
+\IEEEauthorblockA{\textit{Dept. Computer Science \& Software Engineering} \\
+\textit{Concordia University}\\
+Montreal, Canada \\
+p\_ange@live.concordia.ca}
+{\footnotesize ID: 25976944}
+}
+
+\maketitle
+
+
+\section{The Triplet-Loss Pipeline}
+In this supervised similarity or metric learning, the Triplet-Loss pipeline consists of 
+\begin{enumerate}
+    \item Retrieve images from CUB200\_2011 dataset within \texttt{TripletCUBDataset} class
+    \item Transform images into tensors and apply additional augmentations to the training set only
+    \item Train the model using the ResNet18 and ResNet34 pretrained models (20 epochs with varying learning rates and batch sizes)
+    \item Optaining the results for the trainings.
+    \item Trainig the model with ResNet18 with 60 epochs (varying batch sizes).
+    \item Testing the models using the non-augmneted test datassets and obtaing the test metrics (cosine similarity and percision@K for each of the labels) and comparing the results.
+\end{enumerate}
+\par\vspace{1em}
