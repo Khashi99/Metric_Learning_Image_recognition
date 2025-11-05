@@ -32,7 +32,7 @@ Precision@10 & 32.55 \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 2}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
@@ -47,7 +47,7 @@ Cosine Similarity Anchor-Negative &  XXXXXXXXXXXXXXXXXXX \\
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 2}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
@@ -64,7 +64,7 @@ Precision@10 & XXXXXXXXXXXXXXXXXXX \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 3}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
@@ -79,7 +79,7 @@ Cosine Similarity Anchor-Negative &  -0.0004 \\
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 3}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
@@ -96,7 +96,7 @@ Precision@10 & 42.51 \\
 
 \begin{table}[H]
 \centering
-\caption{Loss and Accuracy Metrics for Experiment 1}
+\caption{Loss and Accuracy Metrics for Experiment 4}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value} \\
@@ -111,7 +111,7 @@ Cosine Similarity Anchor-Negative &  0.0632 \\
 \end{table}
 \begin{table}[H]
 \centering
-\caption{Precision Metrics for Experiment 1}
+\caption{Precision Metrics for Experiment 4}
 \begin{tabular}{|l|c|}
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
