@@ -39,22 +39,23 @@ p\_ange@live.concordia.ca}
 {\footnotesize ID: 25976944}
 }
 
+\pagestyle{plain}
 \maketitle
 
 \section{The Triplet-Loss Pipeline}
-In this supervised similarity or metric learning, the Triplet-Loss pipeline consists of 
+In this supervised similarity (metric learning), the Triplet-Loss pipeline consists of 
 \begin{enumerate}
     \item Retrieve images from CUB200\_2011 dataset within \texttt{TripletCUBDataset} class
     \item Transform images into tensors and apply additional augmentations to the training set only
-    \item 
-    \item 
+    \item Train the model using ResNet18 and ResNet34 pretrained backbones using the \texttt{TripletMarginLoss} function and \texttt{Adam} optimizer
+    \item The training run calculates the loss (or distance) between triplets (anchor, positive, negative) and updates the weights
+    \item Run the trained model against the test (non-augmented) dataset and observe the loss, cosine similarity and precision and compare to training results
 \end{enumerate}
-\par\vspace{1em}
 
 \section{Training Hyper-parameters}
 We conducted 4 experiments using two pre-trained models: ResNet18 and ResNet34 \\
 ResNet18 contains approximately 11.4 million parameters \\
-ResNet34 contains approximately 21.5 million parameters \\
+ResNet34 contains approximately 21.5 million parameters
 \begin{enumerate}
     \item epochs: 20, learning rate: 0.001, batch size: 32
     \item epochs: 20, learning rate: 0.002, batch size: 32
@@ -75,7 +76,7 @@ ResNet34 contains approximately 21.5 million parameters \\
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.48\textwidth]{cub_attributes_grid.png}
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_2.png}
     \caption{Experiment 2 with ResNet18}
     \label{fig:second_resnet18}
 \end{figure}
@@ -129,7 +130,7 @@ ResNet34 contains approximately 21.5 million parameters \\
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{cub_attributes_grid.png}
+    \includegraphics[width=0.55\textwidth]{train_plot_18_2.png}
     \caption{Experiment 2 with ResNet18}
     \label{fig:second_vis_resnet18}
 \end{figure}
@@ -206,7 +207,35 @@ Precision@10 & 32.55 \\
 \label{tab:first_precision_resnet18}
 \end{table}
 
-\section{Experiment 2 - ResNet18}
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Loss & 0.5932 \\
+Top-1 Accuracy (\%) & 75.04 \\
+Cosine Similarity Anchor-Positive & 0.6542 \\
+Cosine Similarity Anchor-Negative &  0.1330 \\
+\hline
+\end{tabular}
+\label{tab:second_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 25.93 \\
+Precision@5 & 31.28 \\
+Precision@10 & 31.60 \\
+\hline
+\end{tabular}
+\label{tab:second_precision_resnet18}
+\end{table}
 
 \begin{table}[H]
 \centering
@@ -394,13 +423,13 @@ Precision@10 & 27.08 \\
 \subsection{epochs: 60, learning rate: 0.001, batch size: 32}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.48\textwidth]{loss_graph_32_special.png}
+    \includegraphics[width=0.48\textwidth]{loss_graph_32_5.png}
     \caption{Experiment 5 with ResNet18}
     \label{fig:five_special}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{train_plot_32_special.png}
+    \includegraphics[width=0.55\textwidth]{train_plot_32_5.png}
     \caption{Experiment 5 with ResNet18}
     \label{fig:five_vis_special}
 \end{figure}
@@ -438,13 +467,13 @@ Precision@10 & 34.86 \\
 \subsection{epochs: 60, learning rate: 0.001, batch size: 64}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{cub_attributes_grid.png}
+    \includegraphics[width=0.55\textwidth]{loss_graph_18_6.png}
     \caption{Experiment 6 with ResNet18}
     \label{fig:six_special}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{cub_attributes_grid.png}
+    \includegraphics[width=0.55\textwidth]{train_plot_18_6.png}
     \caption{Experiment 6 with ResNet18}
     \label{fig:six_vis_special}
 \end{figure}
@@ -456,10 +485,10 @@ Precision@10 & 34.86 \\
 \hline
 \textbf{Metric (Average)} & \textbf{Value} \\
 \hline
-Loss &  \\
-Top-1 Accuracy (\%) &  \\
-Cosine Similarity Anchor-Positive &  \\
-Cosine Similarity Anchor-Negative &  \\
+Loss & 0.3081 \\
+Top-1 Accuracy (\%) & 89.61 \\
+Cosine Similarity Anchor-Positive & 0.7707 \\
+Cosine Similarity Anchor-Negative & 0.0127  \\
 \hline
 \end{tabular}
 \label{tab:six_stats_special}
@@ -471,13 +500,14 @@ Cosine Similarity Anchor-Negative &  \\
 \hline
 \textbf{Metric} & \textbf{Value (\%)} \\
 \hline
-Precision@1 &  \\
-Precision@5 &  \\
-Precision@10 &  \\
+Precision@1 & 46.91 \\
+Precision@5 & 44.69 \\
+Precision@10 & 42.84 \\
 \hline
 \end{tabular}
 \label{tab:six_precision_special}
 \end{table}
 
+\section{Discussion}
 
 \end{document}
