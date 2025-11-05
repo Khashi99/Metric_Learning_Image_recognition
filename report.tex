@@ -39,17 +39,481 @@ p\_ange@live.concordia.ca}
 {\footnotesize ID: 25976944}
 }
 
+\pagestyle{plain}
 \maketitle
 
-
 \section{The Triplet-Loss Pipeline}
-In this supervised similarity or metric learning, the Triplet-Loss pipeline consists of 
+In this supervised similarity (metric learning), the Triplet-Loss pipeline consists of 
 \begin{enumerate}
     \item Retrieve images from CUB200\_2011 dataset within \texttt{TripletCUBDataset} class
     \item Transform images into tensors and apply additional augmentations to the training set only
-    \item Train the model using the ResNet18 and ResNet34 pretrained models (20 epochs with varying learning rates and batch sizes)
-    \item Optaining the results for the trainings.
-    \item Trainig the model with ResNet18 with 60 epochs (varying batch sizes).
-    \item Testing the models using the non-augmneted test datassets and obtaing the test metrics (cosine similarity and percision@K for each of the labels) and comparing the results.
+    \item Train the model using ResNet18 and ResNet34 pretrained backbones using the \texttt{TripletMarginLoss} function and \texttt{Adam} optimizer
+    \item The training run calculates the loss (or distance) between triplets (anchor, positive, negative) and updates the weights
+    \item Run the trained model against the test (non-augmented) dataset and observe the loss, cosine similarity and precision and compare to training results
 \end{enumerate}
-\par\vspace{1em}
+
+\section{Training Hyper-parameters}
+We conducted 4 experiments using two pre-trained models: ResNet18 and ResNet34 \\
+ResNet18 contains approximately 11.4 million parameters \\
+ResNet34 contains approximately 21.5 million parameters
+\begin{enumerate}
+    \item epochs: 20, learning rate: 0.001, batch size: 32
+    \item epochs: 20, learning rate: 0.002, batch size: 32
+    \item epochs: 20, learning rate: 0.001, batch size: 64
+    \item epochs: 20, learning rate: 0.002, batch size: 64
+    \item[] {\small\textit{Extended Training with ResNet18}}
+    \item epochs: 60, learning rate: 0.001, batch size: 32
+    \item epochs: 60, learning rate: 0.001, batch size: 64
+\end{enumerate}
+
+\section{Training Curves}
+\subsection{ResNet18}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_1.png}
+    \caption{Experiment 1 with ResNet18}
+    \label{fig:first_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_2.png}
+    \caption{Experiment 2 with ResNet18}
+    \label{fig:second_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_3.png}
+    \caption{Experiment 3 with ResNet18}
+    \label{fig:third_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_18_4.png}
+    \caption{Experiment 4 with ResNet18}
+    \label{fig:fourth_resnet18}
+\end{figure}
+
+\subsection{ResNet34}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_34_1.png}
+    \caption{Experiment 1 with ResNet34}
+    \label{fig:first_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_34_2.png}
+    \caption{Experiment 2 with ResNet34}
+    \label{fig:second_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_34_3.png}
+    \caption{Experiment 3 with ResNet34}
+    \label{fig:third_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_34_4.png}
+    \caption{Experiment 4 with ResNet34}
+    \label{fig:fourth_resnet34}
+\end{figure}
+
+
+\section{Embedding Visualizations}
+\subsection{ResNet18}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_18_1.png}
+    \caption{Experiment 1 with ResNet18}
+    \label{fig:first_vis_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_18_2.png}
+    \caption{Experiment 2 with ResNet18}
+    \label{fig:second_vis_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_18_3.png}
+    \caption{Experiment 3 with ResNet18}
+    \label{fig:third_vis_resnet18}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_18_4.png}
+    \caption{Experiment 4 with ResNet18}
+    \label{fig:fourth_vis_resnet18}
+\end{figure}
+
+\subsection{ResNet34}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_1.png}
+    \caption{Experiment 1 with ResNet34}
+    \label{fig:first_vis_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_2.png}
+    \caption{Experiment 2 with ResNet34}
+    \label{fig:second_vis_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_3.png}
+    \caption{Experiment 3 with ResNet34}
+    \label{fig:third_vis_resnet34}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_34_4.png}
+    \caption{Experiment 4 with ResNet34}
+    \label{fig:fourth_vis_resnet34}
+\end{figure}
+
+
+\section{Evaluation Results}
+\subsection{ResNet18}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 1}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.5020 \\
+Top-1 Accuracy (\%) & 79.60 \\
+Cosine Similarity Anchor-Positive & 0.6735 \\
+Cosine Similarity Anchor-Negative &  0.0359 \\
+\hline
+\end{tabular}
+\label{tab:first_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 1}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 33.74 \\
+Precision@5 & 33.83 \\
+Precision@10 & 32.55 \\
+\hline
+\end{tabular}
+\label{tab:first_precision_resnet18}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Loss & 0.5932 \\
+Top-1 Accuracy (\%) & 75.04 \\
+Cosine Similarity Anchor-Positive & 0.6542 \\
+Cosine Similarity Anchor-Negative &  0.1330 \\
+\hline
+\end{tabular}
+\label{tab:second_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 25.93 \\
+Precision@5 & 31.28 \\
+Precision@10 & 31.60 \\
+\hline
+\end{tabular}
+\label{tab:second_precision_resnet18}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.3277 \\
+Top-1 Accuracy (\%) & 89.11 \\
+Cosine Similarity Anchor-Positive & 0.7762 \\
+Cosine Similarity Anchor-Negative &  -0.0004 \\
+\hline
+\end{tabular}
+\label{tab:third_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 39.92 \\
+Precision@5 & 44.03 \\
+Precision@10 & 42.51 \\
+\hline
+\end{tabular}
+\label{tab:third_precision_resnet18}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.5633 \\
+Top-1 Accuracy (\%) & 76.53 \\
+Cosine Similarity Anchor-Positive & 0.6284 \\
+Cosine Similarity Anchor-Negative &  0.0632 \\
+\hline
+\end{tabular}
+\label{tab:forth_stats_resnet18}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 31.69 \\
+Precision@5 & 28.48 \\
+Precision@10 & 27.04 \\
+\hline
+\end{tabular}
+\label{tab:forth_precision_resnet18}
+\end{table}
+
+\subsection{ResNet34}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 1}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.5902 \\
+Top-1 Accuracy (\%) & 75.85 \\
+Cosine Similarity Anchor-Positive & 0.6200 \\
+Cosine Similarity Anchor-Negative &  0.0994 \\
+\hline
+\end{tabular}
+\label{tab:first_stats_resnet34}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 1}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 31.69 \\
+Precision@5 & 30.12 \\
+Precision@10 & 30.37 \\
+\hline
+\end{tabular}
+\label{tab:first_precision_resnet34}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.5829 \\
+Top-1 Accuracy (\%) & 75.63 \\
+Cosine Similarity Anchor-Positive & 0.6727 \\
+Cosine Similarity Anchor-Negative &  0.1282 \\
+\hline
+\end{tabular}
+\label{tab:second_stats_resnet34}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 2}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 26.34 \\
+Precision@5 & 29.14 \\
+Precision@10 & 29.42 \\
+\hline
+\end{tabular}
+\label{tab:second_precision_resnet34}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.4440 \\
+Top-1 Accuracy (\%) & 83.28 \\
+Cosine Similarity Anchor-Positive & 0.7201 \\
+Cosine Similarity Anchor-Negative & 0.0272 \\
+\hline
+\end{tabular}
+\label{tab:third_stats_resnet34}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 34.98 \\
+Precision@5 & 30.86 \\
+Precision@10 & 29.55 \\
+\hline
+\end{tabular}
+\label{tab:third_precision_resnet34}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.6131 \\
+Top-1 Accuracy (\%) & 73.66 \\
+Cosine Similarity Anchor-Positive & 0.6504 \\
+Cosine Similarity Anchor-Negative & 0.1431 \\
+\hline
+\end{tabular}
+\label{tab:fourth_stats_resnet34}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 4}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 25.51 \\
+Precision@5 & 28.31 \\
+Precision@10 & 27.08 \\
+\hline
+\end{tabular}
+\label{tab:fourth_precision_resnet34}
+\end{table}
+
+\section{\textit{Extended Training with ResNet18}}
+\subsection{epochs: 60, learning rate: 0.001, batch size: 32}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{loss_graph_32_5.png}
+    \caption{Experiment 5 with ResNet18}
+    \label{fig:five_special}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_32_5.png}
+    \caption{Experiment 5 with ResNet18}
+    \label{fig:five_vis_special}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 5}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.4344 \\
+Top-1 Accuracy (\%) & 83.53 \\
+Cosine Similarity Anchor-Positive & 0.7268 \\
+Cosine Similarity Anchor-Negative & 0.0781 \\
+\hline
+\end{tabular}
+\label{tab:five_stats_special}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 5}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 33.74 \\
+Precision@5 & 35.97 \\
+Precision@10 & 34.86 \\
+\hline
+\end{tabular}
+\label{tab:five_precision_special}
+\end{table}
+
+\subsection{epochs: 60, learning rate: 0.001, batch size: 64}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{loss_graph_18_6.png}
+    \caption{Experiment 6 with ResNet18}
+    \label{fig:six_special}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{train_plot_18_6.png}
+    \caption{Experiment 6 with ResNet18}
+    \label{fig:six_vis_special}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Loss and Accuracy Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric (Average)} & \textbf{Value} \\
+\hline
+Loss & 0.3081 \\
+Top-1 Accuracy (\%) & 89.61 \\
+Cosine Similarity Anchor-Positive & 0.7707 \\
+Cosine Similarity Anchor-Negative & 0.0127  \\
+\hline
+\end{tabular}
+\label{tab:six_stats_special}
+\end{table}
+\begin{table}[H]
+\centering
+\caption{Precision Metrics for Experiment 6}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value (\%)} \\
+\hline
+Precision@1 & 46.91 \\
+Precision@5 & 44.69 \\
+Precision@10 & 42.84 \\
+\hline
+\end{tabular}
+\label{tab:six_precision_special}
+\end{table}
+
+\section{Discussion}
+In running our experiments (multiple ResNet models and different hyperparameters), we understood the following:
+\begin{enumerate}
+    \item The best result was obtained by increasing out epoch size from 20 to 60. we chose to start with 20 epochs to better evaluate the final trainig hyperparamers. this is consistent with out understanding that a higher epoch size results in a better model. This can be observed for both Experiments 5 and 6, where the loss was lower than the previous experiments and accuracy was higher.
+    \item between experiments 5 and 6, where the epoch size was increased to 60, the model with a higher batch size yielded a lower training loss (0.3), a higher accuracy (89\%) and higher precision metrics.
+    \item The clustering for the classes (the UMAP and T-SNE) did not yield clear differences between the models. However, some clustering can be observed in the Experiments 5 and 6, which could refer to the higher accuracy and precision of those models.
+\end{enumerate}
+
+\end{document}
